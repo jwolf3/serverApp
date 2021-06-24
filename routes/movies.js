@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const movie = require('../models/movie')
 
 //alle movies route
 router.get('/', (req, res) => {
@@ -8,7 +9,7 @@ router.get('/', (req, res) => {
 
 //nieuwe movie route
 router.get('/new', (req, res) => {
-    res.render('movies/new')
+    res.render('movies/new', { movie: new movie() })
 });
 
 //toevoegen nieuwe movie
