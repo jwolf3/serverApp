@@ -4,15 +4,16 @@ const Movie = require('../models/movie');
 
 //alle movies route
 router.get('/', async (req, res) => {
-    let searchOptions = {};
-    if (req.query.title != null && req.query.title != "") {
-        searchOptions.name = new RegExp(req.query.title, "i")
+    let searchOptions = {}
+    if (req.query.title != null && req.query.title !== '') {
+        searchOptions.title = new RegExp(req.query.title, "i")
     }
     try {
-        const movies = await Movie.find({searchOptions})
+        const movies = await Movie.find(searchOptions)
         res.render('movies/index', { 
-            movies: movies, 
-            searchOptions: req.query })
+            movies: movies,
+            searchOptions: req.query
+         })
     } catch {
         res.redirect('/')
     }
